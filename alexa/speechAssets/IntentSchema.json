@@ -1,0 +1,17 @@
+{
+  "intents": [
+    {
+      "intent": "GetPermissionIntent",
+      "slots": [
+        {
+          "name": "name",
+          "type": "AMAZON.US_FIRST_NAME"
+        },
+        {
+          "name": "activity",
+          "type": "LIST_OF_ACTIVITIES"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+GetPermissionIntent does {name} have permission to {activity}?
+GetPermissionIntent can {name} {activity}?
+GetPermissionIntent is {name} allowed to {activity}?
