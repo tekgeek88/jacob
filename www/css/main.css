@@ -1,0 +1,42 @@
+
+
+/********************************************************
+                        HEADING
+********************************************************/
+
+header {
+    float: left;
+    margin: 0 0 3% 0;
+    padding: 1% 0 0 0;
+    width: 100%;
+    text-align: center;
+}
+
+
+/********************************************************
+                          BODY
+********************************************************/
+#wrapper {
+  max-width: 940px;
+  margin: 0 auto;
+  padding: 0 5%;
+    
+}
+
+.slds-form-element__control {
+    max-width: 300px;
+}
+
+#fields {
+     
+}
+
+div .slds-button {
+    text-align: center;
+    margin: auto;
+    
+    
+        
+}
+
+
