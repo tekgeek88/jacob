@@ -29,19 +29,6 @@ JacobSkill.prototype = Object.create(AlexaSkill.prototype);
  */
 JacobSkill.prototype.constructor = JacobSkill;
 
-/**
- * 
- */
-JacobSkill.prototype.eventHandlers.onSessionStarted = function (sessionStartedRequest, session) {
-  // Session init logic goes here.
-};
-
-/**
- * 
- */
-JacobSkill.prototype.eventHandlers.onSessionEnded = function (sessionEndedRequest, session) {
-  // Session clean up logic goes here.
-};
 
 /**
  * 
@@ -70,16 +57,18 @@ function lookUpUser(intent, callback, response) {
     API_ROOT + "users.php?familyId=1",
     function (result) {
       var users = JSON.parse(result);
-      console.log(result);
       var match;
       for(var i = 0, currUser; (currUser = users[i]); i++) {
-        if (currUser.CHILD_NAME == intent.slots.name.value) {
+        if (currUser.CHILD_NAME.toLowerCase() == intent.slots.name.value.toLowerCase()) {
           match = currUser;
         }
       }
+      console.log(intent);
       //
       if (match) {
         lookUpUserActivity(intent, match, handleUserActivityLookUp, response);
+      } else {
+        response.tell("Sorry, Jacob does not recognize " + intent.slots.name.value);
       }
     }
   );
@@ -97,14 +86,14 @@ function lookUpUserActivity(intent, user, callback, response) {
       var activities = JSON.parse(result);
       var match;
       for(var i = 0, currActivity; (currActivity = activities[i]); i++) {
-        if (currActivity.REWARD_NAME == intent.slots.activity.value) {
+        if (currActivity.REWARD_NAME.toLowerCase() == intent.slots.activity.value.toLowerCase()) {
           match = currActivity;
         }
       }
       //
       if (match) {
-        console.log(user, match);
         var jacobSays;
+
         if (Number(user.SCORE) < Number(match.SCORE)) {
           jacobSays = "Yes, " + user.CHILD_NAME + " can " + match.REWARD_NAME + ".";
         } else {
@@ -115,6 +104,7 @@ function lookUpUserActivity(intent, user, callback, response) {
           response,
           "Jacob says: " + jacobSays
         );
+
       } else {
         callback(
           response,
